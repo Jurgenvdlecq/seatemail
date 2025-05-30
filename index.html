@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wittebrug SEAT E-mailgenerator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Wittebrug SEAT E-mailgenerator</h1>
+    <div class="container">
+        <div class="form">
+            <label>Aanhef:
+                <select id="aanspreekvorm">
+                    <option value="u">De heer</option>
+                    <option value="u_mevrouw">Mevrouw</option>
+                    <option value="jij">Voornaam</option>
+                </select>
+            </label>
+            <label>Voornaam: <input type="text" id="voornaam"></label>
+            <label>Achternaam: <input type="text" id="klantnaam"></label>
+                <select id="aanhef">
+                    <option value="Geachte heer">De heer</option>
+                    <option value="Geachte mevrouw">Mevrouw</option>
+                </select>
+            </label>
+            <label>Klantnaam: <input type="text" id="klantnaam"></label>
+            <label>Type e-mail:
+                <select id="emailtype" onchange="toonVelden()">
+                    <option value="internetlead">Internetlead</option>
+                    <option value="telefonisch">Telefonische aanvraag</option>
+                    <option value="showroom">Showroombezoek</option>
+                    <option value="offerte_zonder_inruil">Offerte zonder inruil</option>
+                    <option value="offerte_met_inruil">Offerte met inruil</option>
+                    <option value="private_lease">Private leaseofferte</option>
+                    <option value="proefrit">Proefritbevestiging</option>
+                    <option value="afspraak">Afspraakbevestiging</option>
+                </select>
+            </label>
+            <div id="veld-model"><label>Model: <input type="text" id="model"></label></div>
+            <div id="veld-kleur"><label>Kleur: <input type="text" id="kleur"></label></div>
+            <div id="veld-prijs"><label>Rijklaarprijs (€): <input type="text" id="prijs"></label></div>
+            <div id="veld-levertijd"><label>Levertijd: <input type="text" id="levertijd"></label></div>
+            <div id="veld-inruilprijs"><label>Inruilprijs (€): <input type="text" id="inruilprijs"></label></div>
+            <div id="veld-kenteken"><label>Kenteken inruilauto: <input type="text" id="kenteken"></label></div>
+            <div id="veld-datum"><label>Datum: <input type="date" id="datum"></label></div>
+            <div id="veld-tijdstip"><label>Tijdstip: <input type="time" id="tijdstip"></label></div>
+            <div id="veld-looptijd"><label>Looptijd in maanden: <input type="number" id="looptijd"></label></div>
+            <div id="veld-km"><label>Kilometers per jaar: <input type="number" id="kilometers"></label></div>
+            <div id="veld-risico"><label>Eigen risico (€): <input type="text" id="risico"></label></div>
+            <div id="veld-maandbedrag"><label>Maandbedrag (€): <input type="text" id="maandbedrag"></label></div>
+            <button onclick="genereerEmail()">Creëer e-mail</button>
+    <a id="outlookButton" style="display:none;" target="_blank">
+        <button type="button">Open in Outlook</button>
+    </a>
+        </div>
+        <div class="preview">
+            <h2>Voorvertoning e-mail</h2>
+            <pre id="emailPreview"></pre>
+            <button onclick="kopieerTekst()">Kopieer naar klembord</button>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
