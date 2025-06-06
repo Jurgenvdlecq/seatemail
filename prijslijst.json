@@ -1,0 +1,198 @@
+[
+  {
+    "merk": "SEAT",
+    "model": "Arona",
+    "motor": "1.0 EcoTSI 70 kW / 95 pk Hand-5",
+    "uitvoering": "Reference",
+    "vanafprijs": 26490
+  },
+  {
+    "merk": "SEAT",
+    "model": "Arona",
+    "motor": "1.0 EcoTSI 70 kW / 95 pk Hand-5",
+    "uitvoering": "Style",
+    "vanafprijs": 29990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Arona",
+    "motor": "1.0 EcoTSI 70 kW / 95 pk Hand-5",
+    "uitvoering": "Style Business Connect",
+    "vanafprijs": 30990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Arona",
+    "motor": "1.0 EcoTSI 70 kW / 95 pk Hand-5",
+    "uitvoering": "FR Business Connect",
+    "vanafprijs": 33990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Arona",
+    "motor": "1.0 EcoTSI 80 kW / 115 pk DSG-7 automaat",
+    "uitvoering": "Style Business Connect",
+    "vanafprijs": 32990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Arona",
+    "motor": "1.0 EcoTSI 80 kW / 115 pk DSG-7 automaat",
+    "uitvoering": "FR Business Connect",
+    "vanafprijs": 35990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Ateca",
+    "motor": "1.0 TSI 85 kW / 115 pk Hand-6",
+    "uitvoering": "Style Business Intense",
+    "vanafprijs": 36990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Ateca",
+    "motor": "1.5 TSI 110 kW / 150 pk DSG-7 automaat",
+    "uitvoering": "Style Business Intense",
+    "vanafprijs": 38990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Ateca",
+    "motor": "1.5 TSI 110 kW / 150 pk DSG-7 automaat",
+    "uitvoering": "FR Business Intense",
+    "vanafprijs": 39990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Ibiza",
+    "motor": "1.0 MPI 59 kW / 80 pk Hand-5",
+    "uitvoering": "Reference",
+    "vanafprijs": 22990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Ibiza",
+    "motor": "1.0 EcoTSI 70 kW / 80 pk Hand-5",
+    "uitvoering": "Style Plus",
+    "vanafprijs": 23790
+  },
+  {
+    "merk": "SEAT",
+    "model": "Ibiza",
+    "motor": "1.0 EcoTSI 70 kW / 80 pk Hand-5",
+    "uitvoering": "Style",
+    "vanafprijs": 25990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Ibiza",
+    "motor": "1.0 EcoTSI 70 kW / 80 pk Hand-5",
+    "uitvoering": "Style Business Connect",
+    "vanafprijs": 26490
+  },
+  {
+    "merk": "SEAT",
+    "model": "Ibiza",
+    "motor": "1.0 EcoTSI 70 kW / 80 pk Hand-5",
+    "uitvoering": "FR Business Connect",
+    "vanafprijs": 29990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Ibiza",
+    "motor": "1.0 EcoTSI 85 kW / 115 pk DSG-7 automaat",
+    "uitvoering": "Style Business Connect",
+    "vanafprijs": 28490
+  },
+  {
+    "merk": "SEAT",
+    "model": "Ibiza",
+    "motor": "1.0 EcoTSI 85 kW / 115 pk DSG-7 automaat",
+    "uitvoering": "FR Business Connect",
+    "vanafprijs": 31990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon 5-deurs",
+    "motor": "1.5 TSI 85 kW / 116 pk Hand-6",
+    "uitvoering": "Style",
+    "vanafprijs": 30990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon 5-deurs",
+    "motor": "1.5 TSI 85 kW / 116 pk Hand-6",
+    "uitvoering": "Style Business Intense",
+    "vanafprijs": 32990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon 5-deurs",
+    "motor": "1.5 eTSI 85 kW / 116 pk DSG-7 automaat",
+    "uitvoering": "Style Business Intense",
+    "vanafprijs": 34990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon 5-deurs",
+    "motor": "1.5 TSI e-Hybrid 150 kW / 204 pk DSG-6 automaat",
+    "uitvoering": "Style",
+    "vanafprijs": 34990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon 5-deurs",
+    "motor": "1.5 TSI e-Hybrid 150 kW / 204 pk DSG-6 automaat",
+    "uitvoering": "Style Business Intense",
+    "vanafprijs": 36990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon 5-deurs",
+    "motor": "1.5 TSI e-Hybrid 150 kW / 204 pk DSG-6 automaat",
+    "uitvoering": "FR Business",
+    "vanafprijs": 39990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon Sportstourer",
+    "motor": "1.5 TSI 85 kW / 116 pk Hand-6",
+    "uitvoering": "Style",
+    "vanafprijs": 31990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon Sportstourer",
+    "motor": "1.5 TSI 85 kW / 116 pk Hand-6",
+    "uitvoering": "Style Business Intense",
+    "vanafprijs": 33990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon Sportstourer",
+    "motor": "1.5 eTSI 85 kW / 116 pk DSG-7 automaat",
+    "uitvoering": "Style Business Intense",
+    "vanafprijs": 35990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon Sportstourer",
+    "motor": "1.5 TSI e-Hybrid 150 kW / 204 pk DSG-6 automaat",
+    "uitvoering": "Style",
+    "vanafprijs": 35990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon Sportstourer",
+    "motor": "1.5 TSI e-Hybrid 150 kW / 204 pk DSG-6 automaat",
+    "uitvoering": "Style Business Intense",
+    "vanafprijs": 37990
+  },
+  {
+    "merk": "SEAT",
+    "model": "Leon Sportstourer",
+    "motor": "1.5 TSI e-Hybrid 150 kW / 204 pk DSG-6 automaat",
+    "uitvoering": "FR Business",
+    "vanafprijs": 40990
+  }
+]
