@@ -1,20 +1,121 @@
+/* styles.css */
+
+/* Algemene resets en fonts */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 11pt;
-    margin: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #f9f9f9;
+  color: #333;
 }
-.container {
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
+
+header {
+  background-color: #005b96;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 }
-.form label {
-    display: block;
-    margin-bottom: 10px;
+
+header h1 {
+  margin-bottom: 8px;
+  font-size: 1.8rem;
 }
-.preview pre {
-    background: #f4f4f4;
-    padding: 10px;
-    border: 1px solid #ccc;
-    white-space: pre-wrap;
+
+header p {
+  font-size: 1rem;
+}
+
+/* Container */
+main {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0 15px;
+}
+
+/* Kaart-achtige secties */
+.card {
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+  padding: 20px;
+}
+
+.card h2 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  color: #005b96;
+}
+
+/* Formulierelementen */
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"],
+textarea {
+  padding: 8px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  resize: vertical;
+}
+
+button {
+  background-color: #005b96;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+button:hover {
+  background-color: #004073;
+}
+
+/* Result-blocks verschijnen pas na verwerking */
+.hidden {
+  display: none;
+}
+
+.result-block {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.result-block h3 {
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+  color: #333;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+  margin: 40px 0 20px;
 }
