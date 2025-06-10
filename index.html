@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="nl">
 <head>
   <meta charset="UTF-8"/>
@@ -7,457 +6,471 @@
   <title>Wittebrug E-mailgenerator</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
-
-```
-* { 
-  box-sizing: border-box; 
-  margin: 0;
-  padding: 0;
-}
-
-body { 
-  font-family: 'Open Sans', sans-serif; 
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #333; 
-  min-height: 100vh;
-}
-
-.container { 
-  max-width: 1400px; 
-  margin: 0 auto; 
-  padding: 20px; 
-}
-
-header { 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
-  background: linear-gradient(135deg, #0033A0 0%, #004cbf 100%);
-  color: #fff; 
-  padding: 20px 30px; 
-  border-radius: 12px; 
-  box-shadow: 0 8px 32px rgba(0, 51, 160, 0.3);
-  margin-bottom: 30px;
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.logo { 
-  height: 50px; 
-  width: auto;
-  filter: brightness(0) invert(1);
-}
-
-header h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-.language-selection {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.language-selection label { 
-  font-weight: 600; 
-  font-size: 0.9rem;
-}
-
-.language-selection select {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  font-weight: 600;
-}
-
-.language-selection select option {
-  background: #0033A0;
-  color: white;
-}
-
-main { 
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 30px; 
-}
-
-@media(max-width: 1024px) { 
-  main { 
-    grid-template-columns: 1fr; 
-  }
-}
-
-.form-section, .preview-section { 
-  background: #fff; 
-  border-radius: 16px; 
-  padding: 30px; 
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 51, 160, 0.1);
-}
-
-.form-section h2, .preview-section h2 {
-  color: #0033A0;
-  font-size: 1.5rem;
-  margin-bottom: 25px;
-  font-weight: 700;
-}
-
-.fieldset-group { 
-  border: 2px solid #e8f2ff; 
-  border-radius: 12px; 
-  padding: 25px; 
-  background: linear-gradient(135deg, #f8fbff 0%, #e8f2ff 100%);
-  margin-bottom: 25px; 
-}
-
-.fieldset-group legend {
-  background: #0033A0;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.field-group { 
-  margin-bottom: 20px; 
-}
-
-.field-group label { 
-  display: block; 
-  font-weight: 600; 
-  margin-bottom: 8px; 
-  color: #333;
-  font-size: 0.9rem;
-}
-
-.field-group input, .field-group select { 
-  width: 100%; 
-  padding: 12px 16px; 
-  border: 2px solid #e0e6ed; 
-  border-radius: 8px; 
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  background: white;
-}
-
-.field-group input:focus, .field-group select:focus { 
-  border-color: #0033A0; 
-  outline: none; 
-  box-shadow: 0 0 0 3px rgba(0, 51, 160, 0.1);
-  transform: translateY(-1px);
-}
-
-.field-group input::placeholder {
-  color: #94a3b8;
-  font-style: italic;
-}
-
-.quick-actions { 
-  background: #f0f9ff; 
-  border: 2px solid #0ea5e9; 
-  border-radius: 12px; 
-  padding: 20px; 
-  margin-bottom: 25px;
-}
-
-.quick-actions h3 {
-  color: #0369a1;
-  font-size: 1.1rem;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.quick-btn {
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin: 5px 5px 0 0;
-  transition: all 0.3s ease;
-}
-
-.quick-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
-}
-
-.template-style {
-  background: #fefce8;
-  border: 2px solid #eab308;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 25px;
-}
-
-.template-style h3 {
-  color: #a16207;
-  font-size: 1.1rem;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.style-options {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.style-btn {
-  background: white;
-  color: #a16207;
-  border: 2px solid #fbbf24;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-}
-
-.style-btn.active {
-  background: #fbbf24;
-  color: white;
-}
-
-.style-btn:hover {
-  background: #fbbf24;
-  color: white;
-}
-
-.follow-up-section {
-  background: #f0fdf4;
-  border: 2px solid #22c55e;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 25px;
-}
-
-.follow-up-section h3 {
-  color: #166534;
-  font-size: 1.1rem;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.reminder-row {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.reminder-row input[type="date"], .reminder-row select {
-  flex: 1;
-}
-
-.reminder-row button {
-  background: #22c55e;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.85rem;
-}
-
-.reminder-list {
-  margin-top: 15px;
-}
-
-.reminder-item {
-  background: white;
-  border: 1px solid #bbf7d0;
-  border-radius: 6px;
-  padding: 10px;
-  margin-bottom: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.reminder-item .remove-btn {
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8rem;
-}
-
-.button-row { 
-  margin-top: 30px; 
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.button-row button { 
-  background: linear-gradient(135deg, #0033A0 0%, #004cbf 100%);
-  color: #fff; 
-  border: none; 
-  padding: 14px 24px; 
-  border-radius: 8px; 
-  cursor: pointer; 
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.button-row button:hover:not(:disabled) { 
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 51, 160, 0.3);
-}
-
-.button-row button:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.button-row button:disabled { 
-  background: #94a3b8; 
-  cursor: not-allowed; 
-  transform: none;
-}
-
-.copy-btn {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
-}
-
-#output { 
-  background: #f8fafc; 
-  padding: 25px; 
-  border-radius: 12px; 
-  min-height: 400px; 
-  overflow-y: auto; 
-  border: 2px solid #e2e8f0;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  color: #334155;
-}
-
-.subject-line {
-  background: #e0f2fe;
-  border: 1px solid #0ea5e9;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 20px;
-}
-
-.subject-line h4 {
-  color: #0369a1;
-  font-size: 1rem;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.subject-line .subject-text {
-  background: white;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: 600;
-  color: #1e293b;
-}
-
-#feedback { 
-  margin-top: 15px; 
-  padding: 10px 15px;
-  border-radius: 6px;
-  font-weight: 600;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-#feedback.show {
-  opacity: 1;
-}
-
-#feedback.success {
-  background: #dcfce7;
-  color: #166534;
-  border: 1px solid #bbf7d0;
-}
-
-#feedback.error {
-  background: #fef2f2;
-  color: #dc2626;
-  border: 1px solid #fecaca;
-}
-
-.validation-error {
-  border-color: #ef4444 !important;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
-}
-
-@media(max-width: 768px) {
-  .container {
-    padding: 15px;
-  }
-  
-  header {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-  }
-  
-  .logo-section {
-    justify-content: center;
-  }
-  
-  .form-section, .preview-section {
-    padding: 20px;
-  }
-  
-  .fieldset-group {
-    padding: 20px;
-  }
-  
-  .button-row {
-    flex-direction: column;
-  }
-  
-  .button-row button {
-    justify-content: center;
-  }
-  
-  .reminder-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .style-options {
-    justify-content: center;
-  }
-}
-```
-
+    
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+    
+    body { 
+      font-family: 'Open Sans', sans-serif; 
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333; 
+      min-height: 100vh;
+    }
+    
+    .container { 
+      max-width: 1400px; 
+      margin: 0 auto; 
+      padding: 20px; 
+    }
+    
+    header { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      background: linear-gradient(135deg, #0033A0 0%, #004cbf 100%);
+      color: #fff; 
+      padding: 20px 30px; 
+      border-radius: 12px; 
+      box-shadow: 0 8px 32px rgba(0, 51, 160, 0.3);
+      margin-bottom: 30px;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo { 
+      height: 50px; 
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    
+    .language-selection {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .language-selection label { 
+      font-weight: 600; 
+      font-size: 0.9rem;
+    }
+    
+    .language-selection select {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-weight: 600;
+    }
+    
+    .language-selection select option {
+      background: #0033A0;
+      color: white;
+    }
+    
+    main { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 30px; 
+    }
+    
+    @media(max-width: 1024px) { 
+      main { 
+        grid-template-columns: 1fr; 
+      }
+    }
+    
+    .form-section, .preview-section { 
+      background: #fff; 
+      border-radius: 16px; 
+      padding: 30px; 
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 51, 160, 0.1);
+    }
+    
+    .form-section h2, .preview-section h2 {
+      color: #0033A0;
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+    
+    .fieldset-group { 
+      border: 2px solid #e8f2ff; 
+      border-radius: 12px; 
+      padding: 25px; 
+      background: linear-gradient(135deg, #f8fbff 0%, #e8f2ff 100%);
+      margin-bottom: 25px; 
+    }
+    
+    .fieldset-group legend {
+      background: #0033A0;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .field-group { 
+      margin-bottom: 20px; 
+    }
+    
+    .field-group label { 
+      display: block; 
+      font-weight: 600; 
+      margin-bottom: 8px; 
+      color: #333;
+      font-size: 0.9rem;
+    }
+    
+    .field-group input, .field-group select { 
+      width: 100%; 
+      padding: 12px 16px; 
+      border: 2px solid #e0e6ed; 
+      border-radius: 8px; 
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+    }
+    
+    .field-group input:focus, .field-group select:focus { 
+      border-color: #0033A0; 
+      outline: none; 
+      box-shadow: 0 0 0 3px rgba(0, 51, 160, 0.1);
+      transform: translateY(-1px);
+    }
+    
+    .field-group input::placeholder {
+      color: #94a3b8;
+      font-style: italic;
+    }
+    
+    .quick-actions { 
+      background: #f0f9ff; 
+      border: 2px solid #0ea5e9; 
+      border-radius: 12px; 
+      padding: 20px; 
+      margin-bottom: 25px;
+    }
+    
+    .quick-actions h3 {
+      color: #0369a1;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .quick-btn {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin: 5px 5px 0 0;
+      transition: all 0.3s ease;
+    }
+    
+    .quick-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    }
+    
+    .template-style {
+      background: #fefce8;
+      border: 2px solid #eab308;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+    
+    .template-style h3 {
+      color: #a16207;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .style-options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .style-btn {
+      background: white;
+      color: #a16207;
+      border: 2px solid #fbbf24;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+    
+    .style-btn.active {
+      background: #fbbf24;
+      color: white;
+    }
+    
+    .style-btn:hover {
+      background: #fbbf24;
+      color: white;
+    }
+    
+    .user-selection {
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+    
+    .user-selection h3 {
+      color: #92400e;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .follow-up-section {
+      background: #f0fdf4;
+      border: 2px solid #22c55e;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+    
+    .follow-up-section h3 {
+      color: #166534;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .reminder-row {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .reminder-row input[type="date"], .reminder-row select {
+      flex: 1;
+    }
+    
+    .reminder-row button {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    
+    .reminder-list {
+      margin-top: 15px;
+    }
+    
+    .reminder-item {
+      background: white;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .reminder-item .remove-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    
+    .button-row { 
+      margin-top: 30px; 
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .button-row button { 
+      background: linear-gradient(135deg, #0033A0 0%, #004cbf 100%);
+      color: #fff; 
+      border: none; 
+      padding: 14px 24px; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .button-row button:hover:not(:disabled) { 
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 51, 160, 0.3);
+    }
+    
+    .button-row button:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    
+    .button-row button:disabled { 
+      background: #94a3b8; 
+      cursor: not-allowed; 
+      transform: none;
+    }
+    
+    .copy-btn {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+    }
+    
+    #output { 
+      background: #f8fafc; 
+      padding: 25px; 
+      border-radius: 12px; 
+      min-height: 400px; 
+      overflow-y: auto; 
+      border: 2px solid #e2e8f0;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      color: #334155;
+    }
+    
+    .subject-line {
+      background: #e0f2fe;
+      border: 1px solid #0ea5e9;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .subject-line h4 {
+      color: #0369a1;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .subject-line .subject-text {
+      background: white;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    
+    #feedback { 
+      margin-top: 15px; 
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    #feedback.show {
+      opacity: 1;
+    }
+    
+    #feedback.success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+    
+    #feedback.error {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+    
+    .validation-error {
+      border-color: #ef4444 !important;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+    }
+    
+    @media(max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+      
+      header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      .logo-section {
+        justify-content: center;
+      }
+      
+      .form-section, .preview-section {
+        padding: 20px;
+      }
+      
+      .fieldset-group {
+        padding: 20px;
+      }
+      
+      .button-row {
+        flex-direction: column;
+      }
+      
+      .button-row button {
+        justify-content: center;
+      }
+      
+      .reminder-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .style-options {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -475,207 +488,234 @@ main {
         </select>
       </div>
     </header>
-
-```
-<main>
-  <section class="form-section">
-    <h2>📝 Formulier</h2>
     
-    <!-- Quick Actions -->
-    <div class="quick-actions">
-      <h3>⚡ Snelle acties</h3>
-      <button type="button" class="quick-btn" onclick="fillDemoData()">Demo gegevens</button>
-      <button type="button" class="quick-btn" onclick="fillSeatData()">SEATvoorbeeld</button>
-      <button type="button" class="quick-btn" onclick="fillCupraData()">CUPRAvoorbeeld</button>
-      <button type="button" class="quick-btn" onclick="clearForm()">Formulier wissen</button>
-    </div>
+    <main>
+      <section class="form-section">
+        <h2>📝 Formulier</h2>
+        
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <h3>⚡ Snelle acties</h3>
+          <button type="button" class="quick-btn" onclick="fillDemoData()">Demo gegevens</button>
+          <button type="button" class="quick-btn" onclick="fillSeatData()">SEAT voorbeeld</button>
+          <button type="button" class="quick-btn" onclick="fillCupraData()">CUPRA voorbeeld</button>
+          <button type="button" class="quick-btn" onclick="clearForm()">Formulier wissen</button>
+        </div>
 
-    <!-- Template Style Selection -->
-    <div class="template-style">
-      <h3>🎨 Toonzetting</h3>
-      <div class="style-options">
-        <button type="button" class="style-btn active" data-style="professioneel" onclick="selectStyle(this)">Professioneel</button>
-        <button type="button" class="style-btn" data-style="vriendelijk" onclick="selectStyle(this)">Vriendelijk</button>
-        <button type="button" class="style-btn" data-style="commercieel" onclick="selectStyle(this)">Commercieel</button>
-      </div>
-    </div>
+        <!-- Template Style Selection -->
+        <div class="template-style">
+          <h3>🎨 Toonzetting</h3>
+          <div class="style-options">
+            <button type="button" class="style-btn active" data-style="professioneel" onclick="selectStyle(this)">Professioneel</button>
+            <button type="button" class="style-btn" data-style="vriendelijk" onclick="selectStyle(this)">Vriendelijk</button>
+          </div>
+        </div>
 
-    <form id="emailForm" novalidate>
-      <!-- Klantgegevens -->
-      <fieldset class="fieldset-group">
-        <legend>👤 Klantgegevens</legend>
-        <div class="field-group">
-          <label for="aanhef">Aanhef *</label>
-          <select id="aanhef" required>
-            <option value="">-- Kies aanhef --</option>
-            <option value="heer">De heer</option>
-            <option value="mevrouw">Mevrouw</option>
-            <option value="voornaam">Voornaam</option>
-          </select>
+        <!-- User Selection -->
+        <div class="user-selection">
+          <h3>👤 Verkoopadviseur</h3>
+          <div class="field-group">
+            <label for="userSelect">Selecteer verkoopadviseur</label>
+            <select id="userSelect">
+              <option value="">-- Kies verkoopadviseur --</option>
+              <option value="ebackes">Espri Backes</option>
+              <option value="barias">Bryan Arias</option>
+              <option value="dverheul">Darre Verheul</option>
+              <option value="fkoolhaas">Fleur Koolhaas</option>
+              <option value="jvanderlecq">Jurgen van der Lecq</option>
+              <option value="dsabzewari">Damoen Sabzewari</option>
+            </select>
+          </div>
         </div>
-        <div class="field-group">
-          <label for="voornaam">Voornaam *</label>
-          <input type="text" id="voornaam" required placeholder="Bijv. Anna"/>
-        </div>
-        <div class="field-group">
-          <label for="achternaam">Achternaam *</label>
-          <input type="text" id="achternaam" required placeholder="Bijv. Janssen"/>
-        </div>
-      </fieldset>
-      
-      <!-- Merk en Model -->
-      <fieldset class="fieldset-group">
-        <legend>🚗 Merk en Model</legend>
-        <div class="field-group">
-          <label for="merk">Merk *</label>
-          <select id="merk" required>
-            <option value="">-- Kies merk --</option>
-            <option value="SEAT">SEAT</option>
-            <option value="CUPRA">CUPRA</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label for="model">Model *</label>
-          <select id="model" required>
-            <option value="">-- Kies model --</option>
-          </select>
-        </div>
-      </fieldset>
-      
-      <!-- Type e-mail -->
-      <fieldset class="fieldset-group">
-        <legend>📧 Type e-mail</legend>
-        <div class="field-group">
-          <label for="emailtype">Type e-mail *</label>
-          <select id="emailtype" required>
-            <option value="">-- Kies type --</option>
-            <option value="offerte">Offerte zonder inruil</option>
-            <option value="inruil">Offerte met inruil</option>
-            <option value="proefrit">Proefritbevestiging</option>
-            <option value="afspraak">Afspraakbevestiging</option>
-            <option value="showroom">Showroombezoek</option>
-            <option value="lease">Private lease</option>
-            <option value="followup">Follow-up offerte</option>
-            <option value="status">Status levering</option>
-          </select>
-        </div>
-      </fieldset>
-      
-      <!-- Specifieke gegevens -->
-      <fieldset class="fieldset-group">
-        <legend>📊 Specifieke gegevens</legend>
-        <div class="field-group" id="veld-prijs" style="display:none;">
-          <label for="prijs">Prijs (€) *</label>
-          <input type="number" id="prijs" min="0" placeholder="25000"/>
-        </div>
-        <div class="field-group" id="veld-levertijd" style="display:none;">
-          <label for="levertijd">Levertijd *</label>
-          <input type="text" id="levertijd" placeholder="Bijv. 2 weken, 3 maanden"/>
-        </div>
-        <div class="field-group" id="veld-inruilprijs" style="display:none;">
-          <label for="inruilprijs">Inruilprijs (€) *</label>
-          <input type="number" id="inruilprijs" min="0" placeholder="15000"/>
-        </div>
-        <div class="field-group" id="veld-kenteken" style="display:none;">
-          <label for="kenteken">Kenteken inruilauto *</label>
-          <input type="text" id="kenteken" placeholder="XX-123-XX"/>
-        </div>
-        <div class="field-group" id="veld-datum" style="display:none;">
-          <label for="datum">Datum *</label>
-          <input type="date" id="datum"/>
-        </div>
-        <div class="field-group" id="veld-tijd" style="display:none;">
-          <label for="tijd">Tijd *</label>
-          <input type="time" id="tijd"/>
-        </div>
-        <div class="field-group" id="veld-looptijd" style="display:none;">
-          <label for="looptijd">Looptijd (maanden) *</label>
-          <input type="number" id="looptijd" min="1" placeholder="24"/>
-        </div>
-        <div class="field-group" id="veld-kilometers" style="display:none;">
-          <label for="kilometers">Kilometers per jaar *</label>
-          <input type="number" id="kilometers" min="0" placeholder="20000"/>
-        </div>
-        <div class="field-group" id="veld-eigenrisico" style="display:none;">
-          <label for="eigenrisico">Eigen risico (€) *</label>
-          <input type="number" id="eigenrisico" min="0" placeholder="500"/>
-        </div>
-        <div class="field-group" id="veld-maandbedrag" style="display:none;">
-          <label for="maandbedrag">Maandbedrag (€) *</label>
-          <input type="number" id="maandbedrag" min="0" placeholder="299"/>
-        </div>
-        <div class="field-group" id="veld-banden" style="display:none;">
-          <label for="banden">Type banden *</label>
-          <select id="banden">
-            <option value="">-- Kies type banden --</option>
-            <option value="Zomerbanden">Zomerbanden</option>
-            <option value="Winterbanden">Winterbanden</option>
-            <option value="Allseason banden">Allseason banden</option>
-          </select>
-        </div>
-        <div class="field-group" id="veld-leverdatum" style="display:none;">
-          <label for="leverdatum">Leverdatum *</label>
-          <input type="date" id="leverdatum"/>
-        </div>
-      </fieldset>
 
-      <!-- Follow-up Reminders -->
-      <div class="follow-up-section">
-        <h3>⏰ Follow-up herinneringen</h3>
-        <div class="reminder-row">
-          <input type="date" id="reminderDate" />
-          <select id="reminderType">
-            <option value="">-- Kies actie --</option>
-            <option value="bellen">Klant bellen</option>
-            <option value="email">Follow-up email</option>
-            <option value="offerte">Nieuwe offerte sturen</option>
-            <option value="proefrit">Proefrit aanbieden</option>
-          </select>
-          <button type="button" onclick="addReminder()">➕ Toevoegen</button>
-        </div>
-        <div class="reminder-list" id="reminderList">
-          <!-- Dynamisch gevuld -->
-        </div>
-      </div>
-      
-      <!-- Knoppen -->
-      <div class="button-row">
-        <button type="button" id="generateBtn" disabled>
-          📧 Genereer e-mail
-        </button>
-        <button type="button" id="outlookBtn" style="display:none;">
-          ✉️ Open in Outlook
-        </button>
-        <button type="button" class="copy-btn" onclick="kopieerTekst()">
-          📋 Kopieer tekst
-        </button>
-      </div>
-    </form>
-  </section>
-  
-  <!-- Preview -->
-  <section class="preview-section">
-    <h2>👁️ Preview</h2>
-    <div class="subject-line" id="subjectLine" style="display:none;">
-      <h4>📧 Onderwerp:</h4>
-      <div class="subject-text" id="subjectText"></div>
-    </div>
-    <div id="output">Vul het formulier in om een e-mail te genereren...</div>
-    <div id="feedback"></div>
-  </section>
-</main>
-```
+        <form id="emailForm" novalidate>
+          <!-- Klantgegevens -->
+          <fieldset class="fieldset-group">
+            <legend>👤 Klantgegevens</legend>
+            <div class="field-group">
+              <label for="aanhef">Aanhef *</label>
+              <select id="aanhef" required>
+                <option value="">-- Kies aanhef --</option>
+                <option value="heer">De heer</option>
+                <option value="mevrouw">Mevrouw</option>
+                <option value="voornaam">Voornaam</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="voornaam">Voornaam *</label>
+              <input type="text" id="voornaam" required placeholder="Bijv. Anna"/>
+            </div>
+            <div class="field-group">
+              <label for="achternaam">Achternaam *</label>
+              <input type="text" id="achternaam" required placeholder="Bijv. Janssen"/>
+            </div>
+          </fieldset>
+          
+          <!-- Merk en Model -->
+          <fieldset class="fieldset-group">
+            <legend>🚗 Merk en Model</legend>
+            <div class="field-group">
+              <label for="merk">Merk *</label>
+              <select id="merk" required>
+                <option value="">-- Kies merk --</option>
+                <option value="SEAT">SEAT</option>
+                <option value="CUPRA">CUPRA</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="model">Model *</label>
+              <select id="model" required>
+                <option value="">-- Kies model --</option>
+              </select>
+            </div>
+          </fieldset>
+          
+          <!-- Type e-mail -->
+          <fieldset class="fieldset-group">
+            <legend>📧 Type e-mail</legend>
+            <div class="field-group">
+              <label for="emailtype">Type e-mail *</label>
+              <select id="emailtype" required>
+                <option value="">-- Kies type --</option>
+                <option value="offerte">Offerte zonder inruil</option>
+                <option value="inruil">Offerte met inruil</option>
+                <option value="proefrit">Proefritbevestiging</option>
+                <option value="afspraak">Afspraakbevestiging</option>
+                <option value="showroom">Showroombezoek</option>
+                <option value="lease">Private lease</option>
+                <option value="followup">Follow-up offerte</option>
+                <option value="status">Status levering</option>
+              </select>
+            </div>
+          </fieldset>
+          
+          <!-- Specifieke gegevens -->
+          <fieldset class="fieldset-group">
+            <legend>📊 Specifieke gegevens</legend>
+            <div class="field-group" id="veld-prijs" style="display:none;">
+              <label for="prijs">Prijs (€) *</label>
+              <input type="number" id="prijs" min="0" placeholder="25000"/>
+            </div>
+            <div class="field-group" id="veld-levertijd" style="display:none;">
+              <label for="levertijd">Levertijd *</label>
+              <input type="text" id="levertijd" placeholder="Bijv. 2 weken, 3 maanden"/>
+            </div>
+            <div class="field-group" id="veld-inruilprijs" style="display:none;">
+              <label for="inruilprijs">Inruilprijs (€) *</label>
+              <input type="number" id="inruilprijs" min="0" placeholder="15000"/>
+            </div>
+            <div class="field-group" id="veld-kenteken" style="display:none;">
+              <label for="kenteken">Kenteken inruilauto *</label>
+              <input type="text" id="kenteken" placeholder="XX-123-XX"/>
+            </div>
+            <div class="field-group" id="veld-datum" style="display:none;">
+              <label for="datum">Datum *</label>
+              <input type="date" id="datum"/>
+            </div>
+            <div class="field-group" id="veld-tijd" style="display:none;">
+              <label for="tijd">Tijd *</label>
+              <input type="time" id="tijd"/>
+            </div>
+            <div class="field-group" id="veld-looptijd" style="display:none;">
+              <label for="looptijd">Looptijd (maanden) *</label>
+              <input type="number" id="looptijd" min="1" placeholder="24"/>
+            </div>
+            <div class="field-group" id="veld-kilometers" style="display:none;">
+              <label for="kilometers">Kilometers per jaar *</label>
+              <input type="number" id="kilometers" min="0" placeholder="20000"/>
+            </div>
+            <div class="field-group" id="veld-eigenrisico" style="display:none;">
+              <label for="eigenrisico">Eigen risico (€) *</label>
+              <input type="number" id="eigenrisico" min="0" placeholder="500"/>
+            </div>
+            <div class="field-group" id="veld-maandbedrag" style="display:none;">
+              <label for="maandbedrag">Maandbedrag (€) *</label>
+              <input type="number" id="maandbedrag" min="0" placeholder="299"/>
+            </div>
+            <div class="field-group" id="veld-banden" style="display:none;">
+              <label for="banden">Type banden *</label>
+              <select id="banden">
+                <option value="">-- Kies type banden --</option>
+                <option value="Zomerbanden">Zomerbanden</option>
+                <option value="Winterbanden">Winterbanden</option>
+                <option value="Allseason banden">Allseason banden</option>
+              </select>
+            </div>
+            <div class="field-group" id="veld-leverdatum" style="display:none;">
+              <label for="leverdatum">Leverdatum *</label>
+              <input type="date" id="leverdatum"/>
+            </div>
+          </fieldset>
 
+          <!-- Follow-up Reminders -->
+          <div class="follow-up-section" id="followUpSection" style="display:none;">
+            <h3>⏰ Follow-up herinneringen</h3>
+            <p style="margin-bottom: 15px; font-size: 0.9rem; color: #166534;">
+              📧 Er wordt automatisch een reminder email verstuurd naar de geselecteerde verkoopadviseur.
+            </p>
+            <div class="reminder-row">
+              <input type="date" id="reminderDate" />
+              <select id="reminderType">
+                <option value="">-- Kies actie --</option>
+                <option value="bellen">Klant bellen</option>
+                <option value="email">Follow-up email</option>
+                <option value="offerte">Nieuwe offerte sturen</option>
+                <option value="proefrit">Proefrit aanbieden</option>
+              </select>
+              <button type="button" onclick="addReminder()">➕ Toevoegen</button>
+            </div>
+            <div class="reminder-list" id="reminderList">
+              <!-- Dynamisch gevuld -->
+            </div>
+          </div>
+          
+          <!-- Knoppen -->
+          <div class="button-row">
+            <button type="button" id="generateBtn" disabled>
+              📧 Genereer e-mail
+            </button>
+            <button type="button" id="outlookBtn" style="display:none;">
+              ✉️ Open in Outlook
+            </button>
+            <button type="button" class="copy-btn" onclick="kopieerTekst()">
+              📋 Kopieer tekst
+            </button>
+          </div>
+        </form>
+      </section>
+      
+      <!-- Preview -->
+      <section class="preview-section">
+        <h2>👁️ Preview</h2>
+        <div class="subject-line" id="subjectLine" style="display:none;">
+          <h4>📧 Onderwerp:</h4>
+          <div class="subject-text" id="subjectText"></div>
+        </div>
+        <div id="output">Vul het formulier in om een e-mail te genereren...</div>
+        <div id="feedback"></div>
+      </section>
+    </main>
   </div>
-
+  
   <script>
     // Wittebrug E-mailtool – Enhanced versie
     const seatModels = ["Ibiza", "Leon", "Leon Sportstourer", "Arona", "Ateca"];
     const cupraModels = ["Born", "Formentor", "Leon", "Leon Sportstourer", "Terramar", "Tavascan"];
     
+    // User database
+    const users = {
+      ebackes: { name: "Espri Backes", email: "ebackes@wittebrug.nl" },
+      barias: { name: "Bryan Arias", email: "barias@wittebrug.nl" },
+      dverheul: { name: "Darre Verheul", email: "dverheul@wittebrug.nl" },
+      fkoolhaas: { name: "Fleur Koolhaas", email: "fkoolhaas@wittebrug.nl" },
+      jvanderlecq: { name: "Jurgen van der Lecq", email: "jvanderlecq@wittebrug.nl" },
+      dsabzewari: { name: "Damoen Sabzewari", email: "dsabzewari@wittebrug.nl" }
+    };
+    
     let currentLang = 'nl';
     let currentStyle = 'professioneel';
     let reminders = [];
+    let savedCustomers = {}; // In-memory storage instead of localStorage
 
     // Subject line templates
     const subjectTemplates = {
@@ -700,6 +740,41 @@ main {
         status: (merk, model) => `Delivery status update ${merk} ${model}`
       }
     };
+
+    // Customer data management (simplified - no storage)
+    function saveCustomerData() {
+      // Function kept for compatibility but does nothing
+      // Customer data is only kept during current session
+    }
+
+    function loadCustomerData(customerKey) {
+      // Function kept for compatibility but does nothing
+    }
+
+    function initializeCustomerData() {
+      // Function kept for compatibility but does nothing
+    }
+
+    // User selection
+    function onUserChange() {
+      const userId = document.getElementById('userSelect').value;
+      if (userId && users[userId]) {
+        showFeedback(`Ingelogd als ${users[userId].name}`, 'success');
+      }
+    }
+
+    // Follow-up management
+    function showFollowUpSection() {
+      const emailType = document.getElementById('emailtype').value;
+      const section = document.getElementById('followUpSection');
+      
+      // Show follow-up only for specific email types
+      if (['offerte', 'inruil', 'lease', 'proefrit'].includes(emailType)) {
+        section.style.display = 'block';
+      } else {
+        section.style.display = 'none';
+      }
+    }
 
     // Helper functions
     function translateDuration(text) {
@@ -809,19 +884,58 @@ main {
     function addReminder() {
       const date = document.getElementById('reminderDate').value;
       const type = document.getElementById('reminderType').value;
+      const userId = document.getElementById('userSelect').value;
       
       if (!date || !type) {
         showFeedback('Vul datum en actie in voor herinnering', 'error');
         return;
       }
       
-      const reminder = { date, type, id: Date.now() };
+      if (!userId) {
+        showFeedback('Selecteer eerst een verkoopadviseur', 'error');
+        return;
+      }
+      
+      const reminder = { date, type, id: Date.now(), userId };
       reminders.push(reminder);
       updateReminderList();
       
+      // Send reminder email
+      sendReminderEmail(reminder);
+      
       document.getElementById('reminderDate').value = '';
       document.getElementById('reminderType').value = '';
-      showFeedback('Herinnering toegevoegd!', 'success');
+      showFeedback('Herinnering toegevoegd en email verstuurd!', 'success');
+    }
+
+    function sendReminderEmail(reminder) {
+      const user = users[reminder.userId];
+      const customer = `${document.getElementById('voornaam').value} ${document.getElementById('achternaam').value}`;
+      const merk = document.getElementById('merk').value;
+      const model = document.getElementById('model').value;
+      
+      const typeLabels = {
+        bellen: 'klant bellen',
+        email: 'follow-up email versturen',
+        offerte: 'nieuwe offerte versturen',
+        proefrit: 'proefrit aanbieden'
+      };
+      
+      const subject = `📅 Reminder: ${typeLabels[reminder.type]} - ${customer}`;
+      const body = `Beste ${user.name},
+
+Dit is een automatische herinnering voor:
+
+📞 Klant: ${customer}
+🚗 Voertuig: ${merk} ${model}
+📅 Datum: ${formatDate(reminder.date)}
+✅ Actie: ${typeLabels[reminder.type]}
+
+Met vriendelijke groet,
+Wittebrug E-mailgenerator`;
+
+      // Open mail client
+      window.open(`mailto:${user.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
     }
 
     function removeReminder(id) {
@@ -854,6 +968,9 @@ main {
 
     // Form validation and population
     window.addEventListener('DOMContentLoaded', () => {
+      // Initialize customer data
+      initializeCustomerData();
+      
       populateModels();
       toggleFields();
       validateForm();
@@ -865,8 +982,15 @@ main {
       
       document.getElementById('emailtype').addEventListener('change', () => {
         toggleFields(); 
+        showFollowUpSection();
         validateForm();
       });
+      
+      document.getElementById('userSelect').addEventListener('change', onUserChange);
+      
+      // Customer name auto-complete
+      document.getElementById('voornaam').addEventListener('blur', saveCustomerData);
+      document.getElementById('achternaam').addEventListener('blur', saveCustomerData);
       
       document.getElementById('languageSelect').addEventListener('change', e => {
         currentLang = e.target.value;
@@ -916,6 +1040,9 @@ main {
           el.style.display = (groups[type] || []).includes(id) ? 'block' : 'none';
         }
       });
+      
+      // Show/hide follow-up section
+      showFollowUpSection();
     }
 
     function validateForm() {
@@ -1008,11 +1135,6 @@ main {
           return base.replace(/Hartelijk dank/g, 'Heel hartelijk dank')
                      .replace(/Met vriendelijke groet,/g, 'Met de vriendelijkste groeten,')
                      .replace(/U bent van harte welkom/g, 'Wij verwelkomen u graag');
-        } else if (currentStyle === 'commercieel') {
-          return base.replace(/Hartelijk dank/g, 'Dank u wel')
-                     .replace(/circa/g, 'slechts')
-                     .replace(/U bent van harte welkom/g, 'Profiteer nu van deze kans en bezoek')
-                     + '\n\n🎯 Beperkte tijd beschikbaar - neem snel contact op!';
         }
         return base; // professioneel style
       };
@@ -1286,6 +1408,5 @@ If you have any questions about the delivery, please don't hesitate to contact u
       }, 3000);
     }
   </script>
-
 </body>
 </html>
