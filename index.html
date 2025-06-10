@@ -649,19 +649,20 @@
 
           <!-- Follow-up Reminders -->
           <div class="follow-up-section" id="followUpSection" style="display:none;">
-            <h3>⏰ Follow-up planning</h3>
+            <h3>📅 Follow-up planning</h3>
             <p style="margin-bottom: 15px; font-size: 0.9rem; color: #166534;">
-              📧 Op de geselecteerde datum ontvangt de verkoopadviseur een kant-en-klare email om door te sturen naar de klant.
+              📅 Er wordt een agenda afspraak aangemaakt met de kant-en-klare email tekst voor de klant.
             </p>
             <div class="reminder-row">
               <input type="date" id="reminderDate" />
-              <select id="reminderType">
+              <input type="time" id="reminderTime" value="09:00" style="flex: 0.8;" />
+              <select id="reminderType" style="flex: 1.5;">
                 <option value="">-- Kies follow-up type --</option>
                 <option value="offerte_followup">Follow-up offerte</option>
                 <option value="lease_followup">Follow-up private lease</option>
                 <option value="proefrit_followup">Follow-up proefrit</option>
               </select>
-              <button type="button" onclick="addReminder()">➕ Plannen</button>
+              <button type="button" onclick="addReminder()" style="flex: 1.2;">📅 Plan in agenda</button>
             </div>
             <div class="reminder-list" id="reminderList">
               <!-- Dynamisch gevuld -->
@@ -966,6 +967,7 @@ ${user.email}`;
     // Reminder management
     function addReminder() {
       const date = document.getElementById('reminderDate').value;
+      const time = document.getElementById('reminderTime').value;
       const type = document.getElementById('reminderType').value;
       const userId = document.getElementById('userSelect').value;
       
@@ -990,6 +992,7 @@ ${user.email}`;
       
       const reminder = { 
         date, 
+        time,
         type, 
         id: Date.now(), 
         userId,
@@ -999,15 +1002,16 @@ ${user.email}`;
       reminders.push(reminder);
       updateReminderList();
       
-      // Send reminder email to sales advisor
-      sendReminderEmail(reminder);
+      // Generate calendar event
+      generateCalendarEvent(reminder);
       
       document.getElementById('reminderDate').value = '';
+      document.getElementById('reminderTime').value = '09:00';
       document.getElementById('reminderType').value = '';
-      showFeedback('Follow-up gepland en reminder email verstuurd!', 'success');
+      showFeedback('Agenda afspraak aangemaakt! Download het .ics bestand.', 'success');
     }
 
-    function sendReminderEmail(reminder) {
+    function generateCalendarEvent(reminder) {
       const user = users[reminder.userId];
       const customer = `${reminder.originalData.naam} ${reminder.originalData.achternaam}`;
       const merk = reminder.originalData.merk;
@@ -1016,30 +1020,64 @@ ${user.email}`;
       // Generate the follow-up email content
       const followUpEmail = generateFollowUpEmail(reminder, reminder.originalData);
       
-      const reminderSubject = `📅 Reminder: Follow-up ${customer} - ${merk} ${model}`;
-      const reminderBody = `Beste ${user.name},
+      // Create calendar event
+      const eventTitle = `Follow-up: ${customer} - ${merk} ${model}`;
+      const eventDescription = `FOLLOW-UP ACTIE VOOR KLANT: ${customer}
 
-Dit is een automatische herinnering voor een follow-up actie:
-
-📞 Klant: ${customer}
-🚗 Voertuig: ${merk} ${model}
-📅 Follow-up datum: ${formatDate(reminder.date)}
+VOERTUIG: ${merk} ${model}
+TYPE: ${reminder.type.replace('_', ' ')}
 
 === KANT-EN-KLARE EMAIL VOOR KLANT ===
 
-Onderwerp: ${followUpEmail.subject}
+ONDERWERP: ${followUpEmail.subject}
 
 ${followUpEmail.body}
 
 === EINDE KLANT EMAIL ===
 
-Je kunt bovenstaande email kopiëren en direct naar de klant versturen.
+INSTRUCTIE: Kopieer bovenstaande email en verstuur naar klant.
+KLANT EMAIL: [Vul hier email adres van klant in]
 
-Met vriendelijke groet,
-Wittebrug E-mailgenerator`;
+Gegenereerd door Wittebrug E-mailgenerator`;
 
-      // Open mail client with reminder for sales advisor
-      window.open(`mailto:${user.email}?subject=${encodeURIComponent(reminderSubject)}&body=${encodeURIComponent(reminderBody)}`);
+      // Create .ics file content
+      const startDate = new Date(`${reminder.date}T${reminder.time}:00`);
+      const endDate = new Date(startDate.getTime() + (30 * 60 * 1000)); // 30 minutes later
+      
+      const formatDate = (date) => {
+        return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+      };
+
+      const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Wittebrug//E-mailgenerator//EN
+BEGIN:VEVENT
+UID:${reminder.id}@wittebrug.nl
+DTSTAMP:${formatDate(new Date())}
+DTSTART:${formatDate(startDate)}
+DTEND:${formatDate(endDate)}
+SUMMARY:${eventTitle}
+DESCRIPTION:${eventDescription.replace(/\n/g, '\\n')}
+LOCATION:Wittebrug Automotive
+ATTENDEE:mailto:${user.email}
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:${eventTitle}
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+      // Download .ics file
+      const blob = new Blob([icsContent], { type: 'text/calendar' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `follow-up-${customer.replace(/\s+/g, '-')}-${reminder.date}.ics`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
     }
 
     function removeReminder(id) {
@@ -1063,7 +1101,7 @@ Wittebrug E-mailgenerator`;
       
       list.innerHTML = reminders.map(r => `
         <div class="reminder-item">
-          <span>${formatDate(r.date)} - ${typeLabels[r.type]} (${r.originalData.naam} ${r.originalData.achternaam})</span>
+          <span>${formatDate(r.date)} ${r.time} - ${typeLabels[r.type]} (${r.originalData.naam} ${r.originalData.achternaam})</span>
           <button class="remove-btn" onclick="removeReminder(${r.id})">✕</button>
         </div>
       `).join('');
