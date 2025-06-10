@@ -649,20 +649,19 @@
 
           <!-- Follow-up Reminders -->
           <div class="follow-up-section" id="followUpSection" style="display:none;">
-            <h3>⏰ Follow-up herinneringen</h3>
+            <h3>⏰ Follow-up planning</h3>
             <p style="margin-bottom: 15px; font-size: 0.9rem; color: #166534;">
-              📧 Er wordt automatisch een reminder email verstuurd naar de geselecteerde verkoopadviseur.
+              📧 Op de geselecteerde datum ontvangt de verkoopadviseur een kant-en-klare email om door te sturen naar de klant.
             </p>
             <div class="reminder-row">
               <input type="date" id="reminderDate" />
               <select id="reminderType">
-                <option value="">-- Kies actie --</option>
-                <option value="bellen">Klant bellen</option>
-                <option value="email">Follow-up email</option>
-                <option value="offerte">Nieuwe offerte sturen</option>
-                <option value="proefrit">Proefrit aanbieden</option>
+                <option value="">-- Kies follow-up type --</option>
+                <option value="offerte_followup">Follow-up offerte</option>
+                <option value="lease_followup">Follow-up private lease</option>
+                <option value="proefrit_followup">Follow-up proefrit</option>
               </select>
-              <button type="button" onclick="addReminder()">➕ Toevoegen</button>
+              <button type="button" onclick="addReminder()">➕ Plannen</button>
             </div>
             <div class="reminder-list" id="reminderList">
               <!-- Dynamisch gevuld -->
@@ -776,6 +775,90 @@
       }
     }
 
+    function generateFollowUpEmail(reminder, originalData) {
+      const user = users[reminder.userId];
+      const aanhef = originalData.aanhef;
+      const naam = originalData.naam;
+      const achternaam = originalData.achternaam;
+      const merk = originalData.merk;
+      const model = originalData.model;
+      const originalDate = new Date().toLocaleDateString('nl-NL');
+      
+      // Determine greeting
+      let customerGreeting = '';
+      if (aanhef === 'voornaam') {
+        customerGreeting = `Beste ${naam},`;
+      } else if (aanhef === 'heer') {
+        customerGreeting = `Beste meneer ${achternaam},`;
+      } else {
+        customerGreeting = `Beste mevrouw ${achternaam},`;
+      }
+
+      // Generate follow-up email content based on type
+      let followUpSubject = '';
+      let followUpBody = '';
+      
+      if (reminder.type === 'offerte_followup') {
+        followUpSubject = `Follow-up: Offerte ${merk} ${model}`;
+        followUpBody = `${customerGreeting}
+
+Op ${originalDate} heb ik u de offerte gestuurd voor de ${merk} ${model} en ik ben benieuwd hoe de offerte u bevallen is.
+
+Uiteraard ben ik ook benieuwd wat u van de offerte vindt en wat ik voor u kan betekenen.
+
+Mocht u vragen hebben over de offerte of aanvullende informatie wensen, dan hoor ik dat graag van u. Ook ben ik altijd bereid om de mogelijkheden door te nemen of een proefrit in te plannen.
+
+Ik kijk uit naar uw reactie.
+
+Met vriendelijke groet,
+
+${user.name}
+Wittebrug Automotive
+${user.email}`;
+
+      } else if (reminder.type === 'lease_followup') {
+        followUpSubject = `Follow-up: Private lease voorstel ${merk} ${model}`;
+        followUpBody = `${customerGreeting}
+
+Op ${originalDate} heb ik u het private lease voorstel gestuurd voor de ${merk} ${model}.
+
+Inmiddels heeft u de tijd gehad om het voorstel door te nemen en ik ben benieuwd naar uw bevindingen.
+
+Private lease biedt veel voordelen zoals:
+- All-in maandbedrag (geen verrassingen)
+- Geen zorgen over onderhoud en reparaties
+- Altijd een relatief nieuwe auto
+
+Graag bespreek ik de mogelijkheden met u door of beantwoord ik eventuele vragen die u heeft.
+
+Met vriendelijke groet,
+
+${user.name}
+Wittebrug Automotive
+${user.email}`;
+
+      } else if (reminder.type === 'proefrit_followup') {
+        followUpSubject = `Follow-up: Proefrit ${merk} ${model}`;
+        followUpBody = `${customerGreeting}
+
+Wat fijn dat u op ${originalDate} een proefrit heeft gemaakt met de ${merk} ${model}.
+
+Ik ben benieuwd naar uw ervaring tijdens de proefrit en hoe u de auto heeft ervaren.
+
+Mocht u interesse hebben om verder te gaan, dan maak ik graag een vrijblijvend voorstel voor u. Ook kunnen we eventuele opties en accessoires bespreken die bij uw wensen passen.
+
+Heeft u nog vragen of wilt u een vervolgafspraak inplannen? Dan hoor ik dat graag van u.
+
+Met vriendelijke groet,
+
+${user.name}
+Wittebrug Automotive
+${user.email}`;
+      }
+
+      return { subject: followUpSubject, body: followUpBody };
+    }
+
     // Helper functions
     function translateDuration(text) {
       if (!text) return '';
@@ -887,7 +970,7 @@
       const userId = document.getElementById('userSelect').value;
       
       if (!date || !type) {
-        showFeedback('Vul datum en actie in voor herinnering', 'error');
+        showFeedback('Vul datum en follow-up type in', 'error');
         return;
       }
       
@@ -895,47 +978,68 @@
         showFeedback('Selecteer eerst een verkoopadviseur', 'error');
         return;
       }
+
+      // Collect current form data for the follow-up email
+      const originalData = {
+        aanhef: document.getElementById('aanhef').value,
+        naam: document.getElementById('voornaam').value,
+        achternaam: document.getElementById('achternaam').value,
+        merk: document.getElementById('merk').value,
+        model: document.getElementById('model').value
+      };
       
-      const reminder = { date, type, id: Date.now(), userId };
+      const reminder = { 
+        date, 
+        type, 
+        id: Date.now(), 
+        userId,
+        originalData
+      };
+      
       reminders.push(reminder);
       updateReminderList();
       
-      // Send reminder email
+      // Send reminder email to sales advisor
       sendReminderEmail(reminder);
       
       document.getElementById('reminderDate').value = '';
       document.getElementById('reminderType').value = '';
-      showFeedback('Herinnering toegevoegd en email verstuurd!', 'success');
+      showFeedback('Follow-up gepland en reminder email verstuurd!', 'success');
     }
 
     function sendReminderEmail(reminder) {
       const user = users[reminder.userId];
-      const customer = `${document.getElementById('voornaam').value} ${document.getElementById('achternaam').value}`;
-      const merk = document.getElementById('merk').value;
-      const model = document.getElementById('model').value;
+      const customer = `${reminder.originalData.naam} ${reminder.originalData.achternaam}`;
+      const merk = reminder.originalData.merk;
+      const model = reminder.originalData.model;
       
-      const typeLabels = {
-        bellen: 'klant bellen',
-        email: 'follow-up email versturen',
-        offerte: 'nieuwe offerte versturen',
-        proefrit: 'proefrit aanbieden'
-      };
+      // Generate the follow-up email content
+      const followUpEmail = generateFollowUpEmail(reminder, reminder.originalData);
       
-      const subject = `📅 Reminder: ${typeLabels[reminder.type]} - ${customer}`;
-      const body = `Beste ${user.name},
+      const reminderSubject = `📅 Reminder: Follow-up ${customer} - ${merk} ${model}`;
+      const reminderBody = `Beste ${user.name},
 
-Dit is een automatische herinnering voor:
+Dit is een automatische herinnering voor een follow-up actie:
 
 📞 Klant: ${customer}
 🚗 Voertuig: ${merk} ${model}
-📅 Datum: ${formatDate(reminder.date)}
-✅ Actie: ${typeLabels[reminder.type]}
+📅 Follow-up datum: ${formatDate(reminder.date)}
+
+=== KANT-EN-KLARE EMAIL VOOR KLANT ===
+
+Onderwerp: ${followUpEmail.subject}
+
+${followUpEmail.body}
+
+=== EINDE KLANT EMAIL ===
+
+Je kunt bovenstaande email kopiëren en direct naar de klant versturen.
 
 Met vriendelijke groet,
 Wittebrug E-mailgenerator`;
 
-      // Open mail client
-      window.open(`mailto:${user.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+      // Open mail client with reminder for sales advisor
+      window.open(`mailto:${user.email}?subject=${encodeURIComponent(reminderSubject)}&body=${encodeURIComponent(reminderBody)}`);
     }
 
     function removeReminder(id) {
@@ -952,15 +1056,14 @@ Wittebrug E-mailgenerator`;
       }
       
       const typeLabels = {
-        bellen: '📞 Klant bellen',
-        email: '📧 Follow-up email',
-        offerte: '💰 Nieuwe offerte',
-        proefrit: '🚗 Proefrit aanbieden'
+        offerte_followup: '📧 Follow-up offerte',
+        lease_followup: '📧 Follow-up private lease',
+        proefrit_followup: '📧 Follow-up proefrit'
       };
       
       list.innerHTML = reminders.map(r => `
         <div class="reminder-item">
-          <span>${formatDate(r.date)} - ${typeLabels[r.type]}</span>
+          <span>${formatDate(r.date)} - ${typeLabels[r.type]} (${r.originalData.naam} ${r.originalData.achternaam})</span>
           <button class="remove-btn" onclick="removeReminder(${r.id})">✕</button>
         </div>
       `).join('');
